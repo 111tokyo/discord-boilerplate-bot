@@ -18,7 +18,7 @@ export default function Home() {
           height={300}
           alt="limbot"
         />
-        <h1 className="fade font-bold text-center w-[700px] pb-4 [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+        <h1 className="fade font-bold text-center sm:w-[700px] pb-4 [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
           Limbot est un tout nouveau bot Discord français, développé avec
           Discord.js et TypeScript, offrant une multitude de fonctionnalités
           pour améliorer votre expérience sur Discord.

@@ -49,10 +49,18 @@ html {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 138%; /* ou toute autre largeur nécessaire */
-  height: 138%; /* ou toute autre hauteur nécessaire */
+  width: 130vw; /* Élargir par rapport à la taille de la fenêtre */
+  height: 130vw; /* Élargir par rapport à la taille de la fenêtre */
   border: none;
   z-index: -1;
+}
+
+/* Media query pour réduire la taille lorsque la fenêtre est plus petite */
+@media (max-width: 1300px) {
+  .shader-background {
+    width: 300vw; /* Augmenter encore plus */
+    height: 300vh; /* Augmenter encore plus */
+  }
 }
 
 @keyframes fadeIn {
