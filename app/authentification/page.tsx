@@ -1,12 +1,13 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 require("dotenv").config();
 
 export default function Authentification() {
   const searchParams = useSearchParams();
+  const pathName = usePathname()
 
   const authCode = searchParams.get("code");
   const clientId = process.env.APP_ID;
@@ -20,7 +21,7 @@ export default function Authentification() {
         client_secret: clientSecret,
         grant_type: "authorization_code",
         code: authCode,
-        redirect_uri: "http://localhost:3000/authentification",
+        redirect_uri: pathName,
       });
 
       await fetch("https://discord.com/api/oauth2/token",
@@ -62,7 +63,7 @@ export default function Authentification() {
       localStorage.setItem("avatarcode", user.avatar)
       localStorage.setItem("id", user.id)
 
-      window.location.href = "http://localhost:3000/dashboard/user/@1";
+      window.location.href = pathName.replace("authentification", "dashboard/user/@1");
     };
 
     getUser()
