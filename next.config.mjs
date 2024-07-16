@@ -4,6 +4,9 @@ const nextConfig = {
     APP_ID: process.env.APP_ID,
     APP_SECRET: process.env.APP_SECRET,
   },
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
 };
 
 export default nextConfig;
