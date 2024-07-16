@@ -17,38 +17,38 @@ export default function Authentification() {
     console.log("error 111");
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <h1>Une erreur est survenue.</h1>
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-background" />
       </div>
     );
   }
 
-  const getToken = async () => {
-    const data = new URLSearchParams({
-      client_id: clientId,
-      client_secret: clientSecret,
-      grant_type: "authorization_code",
-      code: authCode,
-      redirect_uri: pathName,
-    });
-
-    await fetch("https://discord.com/api/oauth2/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: data,
-    })
-      .then(async (tokenRequest: any) => {
-        tokenRequest = await tokenRequest.json();
-
-        if (!tokenRequest.access_token) return;
-
-        localStorage.setItem("token", tokenRequest.access_token);
-        return;
-      });
-  };
-
   useEffect(() => {
+    const getToken = async () => {
+      const data = new URLSearchParams({
+        client_id: clientId,
+        client_secret: clientSecret,
+        grant_type: "authorization_code",
+        code: authCode,
+        redirect_uri: pathName,
+      });
+
+      await fetch("https://discord.com/api/oauth2/token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: data,
+      })
+        .then(async (tokenRequest: any) => {
+          tokenRequest = await tokenRequest.json();
+
+          if (!tokenRequest.access_token) return;
+
+          localStorage.setItem("token", tokenRequest.access_token);
+          return;
+        });
+    };
+
     const getUser = async () => {
       await getToken();
 
@@ -71,7 +71,7 @@ export default function Authentification() {
     };
 
     getUser();
-  }, [getToken, pathName]);
+  }, [authCode, clientId, clientSecret, pathName]);
 
   return (
     <>
