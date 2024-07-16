@@ -13,37 +13,37 @@ export default function Authentification() {
   const clientId = process.env.APP_ID;
   const clientSecret = process.env.APP_SECRET;
 
-  if (!clientId || !clientSecret || !authCode) return console.log("error 111");
+  const getToken = async () => {
+    if (!clientId || !clientSecret || !authCode) return console.log("error 111");
+
+      const data = new URLSearchParams({
+        client_id: clientId,
+        client_secret: clientSecret,
+        grant_type: "authorization_code",
+        code: authCode,
+        redirect_uri: pathName,
+      });
+
+      await fetch("https://discord.com/api/oauth2/token",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: data,
+        } 
+      ).then(async (tokenRequest: any) => {
+        tokenRequest = await tokenRequest.json()
+        
+        if(!tokenRequest.access_token) return
+
+        localStorage.setItem("token", tokenRequest.access_token)
+        return;
+      })
+  };
 
   useEffect(() => {
     const getUser = async () => {
-      const getToken = async () => {
-        const data = new URLSearchParams({
-          client_id: clientId,
-          client_secret: clientSecret,
-          grant_type: "authorization_code",
-          code: authCode,
-          redirect_uri: pathName,
-        });
-  
-        await fetch("https://discord.com/api/oauth2/token",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: data,
-          } 
-        ).then(async (tokenRequest: any) => {
-          tokenRequest = await tokenRequest.json()
-          
-          if(!tokenRequest.access_token) return
-  
-          localStorage.setItem("token", tokenRequest.access_token)
-          return;
-        })
-    };
-    
       await getToken()
 
       const token = localStorage.getItem("token")
@@ -64,10 +64,11 @@ export default function Authentification() {
       localStorage.setItem("id", user.id)
 
       window.location.href = pathName.replace("authentification", "dashboard/user/@1");
+      return null
     };
 
     getUser()
-  }, []);
+  }, [pathName, getToken]);
 
   return (
     <>
