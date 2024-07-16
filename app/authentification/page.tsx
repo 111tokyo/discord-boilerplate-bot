@@ -10,8 +10,8 @@ export default function Authentification() {
   const pathName = usePathname();
 
   const authCode = searchParams.get("code");
-  const clientId = process.env.APP_ID;
-  const clientSecret = process.env.APP_SECRET;
+  const clientId = process.env.APP_ID || "1256906109151875092";
+  const clientSecret = process.env.APP_SECRET || "pxDFfRgj0IRBtqAToL_N6Ym5eQjjTT4d";
 
   // Ensure useEffect is not called conditionally
   const isAuthParamsValid = clientId && clientSecret && authCode;
