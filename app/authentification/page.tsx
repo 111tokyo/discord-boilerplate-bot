@@ -18,6 +18,7 @@ export default function Authentification() {
 
   useEffect(() => {
     if (!isAuthParamsValid) {
+      console.log(clientId, clientSecret, authCode)
       console.log("error 111");
       return;
     }

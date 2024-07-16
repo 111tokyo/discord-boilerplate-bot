@@ -23,7 +23,7 @@ export default function Home() {
           Discord.js et TypeScript, offrant une multitude de fonctionnalités
           pour améliorer votre expérience sur Discord.
         </h1>
-        <Link href="https://discord.com/oauth2/authorize?client_id=1256906109151875092&response_type=code&redirect_uri=https%3A%2F%2Flimbot.vercel.app%2Fauthentification&scope=identify+guilds">
+        <Link href="https://discord.com/oauth2/authorize?client_id=1256906109151875092&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauthentification&scope=identify+guilds">
           <Button>
             <LogIn size={19} className="mr-2" />
             Se connecter
