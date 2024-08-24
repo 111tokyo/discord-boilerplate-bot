@@ -1,12 +1,21 @@
 {
-  "name": "app",
+  "name": "discord-roleplay-bot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "dev": "tsc && node .",
+    "start:": "node ."
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "111tokyo",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5"
+  }
 }
